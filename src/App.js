@@ -1,21 +1,18 @@
-import "./styles.css";
+import { codePegs } from "./components/codePegs";
+import { endGame } from "./components/endGame";
+import { DecodingBoard } from "./components/decodingBoard";
+import { rules } from "./components/rules";
+import { title } from "./components/title";
 
-const title = (
-  <div className="title">
-    <h1>Mastermind</h1>
-  </div>
-);
-const rules = <div className="rules">Rules ... </div>;
-const decodingBoard = <div className="decodingBoard"></div>;
-const codePegs = <div className="codePegs"></div>;
-const endGame = <div className="endGame"></div>;
 export default function App() {
   return (
-    <div className="App">
+    <div className="bg-yellow-50">
       {title}
       {rules}
-      {decodingBoard}
-      {codePegs}
+      <div className="h-max flex flex-row justify-items-center">
+        <DecodingBoard />
+        {codePegs}
+      </div>
       {endGame}
     </div>
   );
