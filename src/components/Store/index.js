@@ -1,5 +1,6 @@
 import { createStore } from "redux";
 import { gameReducer } from "./gameReducer";
+import { composeWithDevTools } from "redux-devtools-extension";
 
 export const initialState = {
   pegs: ["red", "yellow", "green", "blue", "purple", "pink"],
@@ -16,6 +17,4 @@ export const initialState = {
   chances: [],
 };
 
-export const store = createStore(gameReducer);
-
-
+export const store = createStore(gameReducer, composeWithDevTools());
