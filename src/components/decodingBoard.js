@@ -20,28 +20,25 @@ export const DecodingBoard = () => {
   if (prevRows.length < 10) {
     // rows before current row
     rows = prevRows.map((e, i) => (
-      <Row
-        id={i}
-        stack={e.stack}
-        hints={e.hints}
-        current={i === rows.length - 1 ? true : false}
-      />
+      <Row key={i} id={i} stack={e.stack} hints={e.hints} current={false} />
     ));
 
     // current row
     rows.push(
       <Row
-          id={prevRows.length}
-          stack={stack}
-          hints={[]}
-          current={true}
-        />
-    )
-    
+        key={prevRows.length}
+        id={prevRows.length}
+        stack={stack}
+        hints={[]}
+        current={true}
+      />
+    );
+
     //  rows after current row
     for (let i = 1; i < 10 - prevRows.length; i++) {
       rows.push(
         <Row
+          key={i + prevRows.length}
           id={i + prevRows.length}
           stack={[]}
           hints={[]}
@@ -49,13 +46,13 @@ export const DecodingBoard = () => {
         />
       );
     }
-
   } else {
     dispatch(set_finished());
   }
 
-  console.log(rows);
   return (
-    <div className="decodingBoard flex-grow w-auto h-12 ml-4 my-4 mr-2">{rows}</div>
+    <div className="decodingBoard flex-grow w-auto h-12 ml-4 my-4 mr-2">
+      {rows}
+    </div>
   );
 };

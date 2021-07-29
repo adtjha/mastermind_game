@@ -14,7 +14,6 @@ const ColorSelector = (props) => {
 
   return (
     <div
-      key={props.color}
       className={style}
       onClick={(e) => dispatch(update_selected(props.color))}
     ></div>
@@ -24,8 +23,8 @@ const ColorSelector = (props) => {
 export const codePegs = (
   <div className="codePegs w-16 h-full m-4 border-gray-400 border-2 border-dotted rounded-xl">
     <div className="py-4 flex flex-col justify-items-center">
-      {color.map((e) => (
-        <ColorSelector color={e} />
+      {color.map((e,i) => (
+        <ColorSelector key={i} color={e} />
       ))}
     </div>
   </div>

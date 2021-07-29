@@ -5,10 +5,20 @@ const initialState = {
   ended: false,
   solved: false,
   selected: [],
-  stack: [],
+  stack: [
+    { id: 1, color: "" },
+    { id: 2, color: "" },
+    { id: 3, color: "" },
+    { id: 4, color: "" },
+  ],
   chances: [
     {
-      stack: ["red", "green", "blue", "yellow"],
+      stack: [
+        { id: 1, color: "red" },
+        { id: 2, color: "green" },
+        { id: 3, color: "blue" },
+        { id: 4, color: "yellow" },
+      ],
       hints: [0, 1, 2, 2],
     },
   ],
@@ -19,12 +29,20 @@ export const gameReducer = (state = initialState, action) => {
   switch (action.type) {
     case SELECTED:
       return { ...state, selected: action.payload };
-    case STACK:
-      return { ...state, stack: action.payload };
+    case STACK: {
+      return {
+        ...state,
+        stack: state.stack.map((e) =>
+          e.id === action.payload.id ? { ...e, color: action.payload.color } : e
+        ),
+      };
+    }
     case FINISH:
       return { ...state, ended: action.payload };
     case SOLVED:
       return { ...state, solved: action.payload };
+    case ADD_CHANCE:
+      return { ...state, chances: [...state.chances, action.payload] };
     default:
       return state;
   }
@@ -43,11 +61,12 @@ export const STACK = "updateStack";
 export const SELECTED = "updateSelected";
 export const FINISH = "finished";
 export const SOLVED = "solved";
+export const ADD_CHANCE = "addChance";
 
 // action creators
-export const update_stack = (state) => ({
+export const update_stack = ({ id, color }) => ({
   type: STACK,
-  payload: state,
+  payload: { id, color },
 });
 export const update_selected = (state) => ({
   type: SELECTED,
@@ -60,4 +79,11 @@ export const set_finished = () => ({
 export const set_solved = () => ({
   type: SOLVED,
   payload: true,
+});
+export const update_chance = ({ stack, hints }) => ({
+  type: ADD_CHANCE,
+  payload: {
+    stack,
+    hints,
+  },
 });
