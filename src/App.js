@@ -24,10 +24,11 @@ export default function App() {
       <div className="bg-yellow-50 h-auto md:h-max md:max-w-lg md:m-auto">
         {title}
         <Rules />
-        <div className="h-full mt-10 flex flex-row justify-items-center">
+        <div className="h-full mt-4 flex flex-row justify-items-center">
           <DecodingBoard />
           <Pegs />
         </div>
+      </div>
         {hasSolved ? (
           <EndGame word="Code Solved" />
         ) : hasEnded ? (
@@ -35,7 +36,6 @@ export default function App() {
         ) : (
           ""
         )}
-      </div>
     </div>
   );
 }
