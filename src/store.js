@@ -2,6 +2,8 @@ import { createStore } from "redux";
 import { composeWithDevTools } from "redux-devtools-extension";
 
 const initialState = {
+  pegs: ["red", "yellow", "green", "blue", "purple", "pink"],
+  code: "",
   ended: false,
   solved: false,
   selected: [],
@@ -11,17 +13,7 @@ const initialState = {
     { id: 3, color: "" },
     { id: 4, color: "" },
   ],
-  chances: [
-    {
-      stack: [
-        { id: 1, color: "red" },
-        { id: 2, color: "green" },
-        { id: 3, color: "blue" },
-        { id: 4, color: "yellow" },
-      ],
-      hints: [0, 1, 2, 2],
-    },
-  ],
+  chances: [],
 };
 
 // reducers
@@ -43,6 +35,12 @@ export const gameReducer = (state = initialState, action) => {
       return { ...state, solved: action.payload };
     case ADD_CHANCE:
       return { ...state, chances: [...state.chances, action.payload] };
+    case CLEAR_STACK:
+      return { ...state, stack: action.payload };
+    case SET_CODE:
+      return { ...state, code: [...state.code, ...action.payload] };
+    case RESET:
+      return { ...state, ...initialState };
     default:
       return state;
   }
@@ -55,6 +53,10 @@ export const getSelectedColor = (state) => state.selected;
 export const getStack = (state) => state.stack;
 export const getHints = (state) => state.hints;
 export const getPrevRows = (state) => state.chances;
+export const getPegs = (state) => state.pegs;
+export const getCode = (state) => state.code;
+export const getEnd = (state) => state.ended;
+export const getSolved = (state) => state.solved;
 
 // action types
 export const STACK = "updateStack";
@@ -62,6 +64,9 @@ export const SELECTED = "updateSelected";
 export const FINISH = "finished";
 export const SOLVED = "solved";
 export const ADD_CHANCE = "addChance";
+export const SET_CODE = "setCode";
+export const CLEAR_STACK = "clearStack";
+export const RESET = "resetGame";
 
 // action creators
 export const update_stack = ({ id, color }) => ({
@@ -83,7 +88,24 @@ export const set_solved = () => ({
 export const update_chance = ({ stack, hints }) => ({
   type: ADD_CHANCE,
   payload: {
-    stack,
-    hints,
+    stack: stack,
+    hints: hints,
   },
+});
+export const set_code = (arr) => ({
+  type: SET_CODE,
+  payload: arr,
+});
+export const clear_stack = () => ({
+  type: CLEAR_STACK,
+  payload: [
+    { id: 1, color: "" },
+    { id: 2, color: "" },
+    { id: 3, color: "" },
+    { id: 4, color: "" },
+  ],
+});
+export const reset_game = () => ({
+  type: RESET,
+  payload: initialState,
 });

@@ -1,6 +1,8 @@
 import { Circle } from "./Circle";
 import { HintCircle } from "./HintCircle";
-import { CheckCircleIcon } from "@heroicons/react/solid";
+import React from "react";
+import { useDispatch } from "react-redux";
+import { SubmitButton } from "./SubmitButton";
 
 export const Row = (props) => {
   let showButton = false;
@@ -9,14 +11,17 @@ export const Row = (props) => {
   const arr = props.stack;
 
   let style =
-    "p-2 mb-2 flex flex-row justify-evenly border-gray-400 border-2 border-dotted rounded-xl";
+    "p-2 mb-2 flex flex-row justify-evenly  rounded-xl";
 
   if (!props.current) {
     style += " opacity-50";
+  } else {
+    style += " border-gray-200 border-2 ";
   }
 
   if (props.stack.length < 4) {
-    // push into stackList
+    // rows after current
+    // push into stack
     props.stack.map((e, i) =>
       stack.push(
         <Circle key={e.id} id={e.id} color={e.color} current={props.current} />
@@ -39,15 +44,25 @@ export const Row = (props) => {
       hints.push(<HintCircle key={i} id={i} res={3} />);
     }
   } else {
+    // current and previous rows
     props.stack.map((e, i) =>
       stack.push(
         <Circle key={e.id} id={e.id} color={e.color} current={props.current} />
       )
     );
-    props.hints.map((e, i) =>
-      hints.push(<HintCircle key={i} id={i} res={e} />)
-    );
-    showButton = true;
+    if (props.hints.length > 0) {
+      props.hints.map((e, i) =>
+        hints.push(<HintCircle key={i} id={i} res={e} />)
+      );
+    } else {
+      for (let i = 0; i < 4; i++) {
+        hints.push(<HintCircle key={i} id={i} res={3} />);
+      }
+    }
+
+    const emptyCircle = stack.filter((e) => e.props.color !== "");
+
+    showButton = emptyCircle.length === 4;
   }
 
   return (
@@ -56,35 +71,15 @@ export const Row = (props) => {
         {stack}
       </div>
       {props.current && showButton ? (
-        <SubmitButton show={props.current && showButton} />
+        <div className="w-8 h-8 mx-2 flex">
+          <SubmitButton />
+        </div>
       ) : (
-        ""
+        <div className="w-8 h-8 mx-2 flex"></div>
       )}
       <div className="hintsRow w-8 h-8 grid grid-cols-2 justify-items-center items-center">
         {hints}
       </div>
-    </div>
-  );
-};
-
-/**
- * 0 - { color: true, position: false } - white
- * 1 - { color: true, position: true } - black
- * 2 - { color: false, postion: false } - x
- * 3 - { empty state }
- */
-
-export const SubmitButton = (props) => {
-  let style = "w-8 h-8 mx-2 flex ";
-  let hide = " hidden ";
-
-  if (!props.show) {
-    style += hide;
-  }
-
-  return (
-    <div className={style}>
-      <CheckCircleIcon className="h-5 w-5 text-black m-auto" />
     </div>
   );
 };

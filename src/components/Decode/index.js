@@ -1,4 +1,4 @@
-import { Row } from "./row";
+import { Row } from "./Row";
 import { useDispatch, useSelector } from "react-redux";
 import {
   getCurrent,
@@ -6,7 +6,7 @@ import {
   getSelectedColor,
   getStack,
   set_finished,
-} from "../store";
+} from "../../store";
 
 export const DecodingBoard = () => {
   let rows = [];
@@ -51,7 +51,7 @@ export const DecodingBoard = () => {
   }
 
   return (
-    <div className="decodingBoard flex-grow w-auto h-12 ml-4 my-4 mr-2">
+    <div className="decodingBoard flex-grow w-auto h-full ml-4 my-4 mr-2">
       {rows}
     </div>
   );
