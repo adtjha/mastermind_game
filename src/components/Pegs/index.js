@@ -1,5 +1,5 @@
 import { useSelector } from "react-redux";
-import { getPegs } from "../../store";
+import { getPegs } from "../Store/selectors";
 import { ColorSelector } from "./ColorSelector";
 
 export const Pegs = () => {

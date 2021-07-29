@@ -4,7 +4,8 @@ import { DecodingBoard } from "./components/Decode";
 import { Rules } from "./components/rules";
 import { title } from "./components/title";
 import { useEffect } from "react";
-import { getEnd, getPegs, getSolved, set_code } from "./store";
+import { set_code } from "./components/Store/action/creator";
+import { getEnd, getPegs, getSolved } from "./components/Store/selectors";
 import { useSelector, useDispatch } from "react-redux";
 
 export default function App() {

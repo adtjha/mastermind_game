@@ -1,5 +1,6 @@
 import { useDispatch, useSelector } from "react-redux";
-import { getSelectedColor, update_stack } from "../../../store";
+import { update_stack } from "../../Store/action/creator";
+import { getSelectedColor } from "../../Store/selectors";
 
 export const Circle = (props) => {
   const selectedColor = useSelector(getSelectedColor);

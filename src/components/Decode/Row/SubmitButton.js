@@ -3,11 +3,13 @@ import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import {
   clear_stack,
-  getCode,
-  getStack,
   set_solved,
-  update_chance,
-} from "../../../store";
+  update_chance
+} from "../../Store/action/creator";
+import {
+  getCode,
+  getStack
+} from "../../Store/selectors";
 
 /**
  * 0 - { color: true, position: false } - white - colorNoPos

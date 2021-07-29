@@ -10,13 +10,12 @@ export const Row = (props) => {
     hints = [];
   const arr = props.stack;
 
-  let style =
-    "p-2 mb-2 flex flex-row justify-evenly  rounded-xl";
+  let style = "p-2 mb-2 flex flex-row justify-evenly rounded-xl";
 
   if (!props.current) {
     style += " opacity-50";
   } else {
-    style += " border-gray-200 border-2 ";
+    style += " border-gray-200 border-2 cursor-pointer ";
   }
 
   if (props.stack.length < 4) {

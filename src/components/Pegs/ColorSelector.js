@@ -1,10 +1,15 @@
 import { useDispatch, useSelector } from "react-redux";
-import { getSelectedColor, update_selected } from "../../store";
+import { update_selected } from "../Store/action/creator";
+import { getSelectedColor } from "../Store/selectors";
 
 export const ColorSelector = (props) => {
   const dispatch = useDispatch();
   const selected = useSelector(getSelectedColor);
-  let style = "w-8 h-8 rounded-full p-4 my-4 mx-auto " + " bg-" + props.color + "-400";
+  let style =
+    "w-8 h-8 rounded-full p-4 my-4 mx-auto cursor-pointer " +
+    " bg-" +
+    props.color +
+    "-400";
 
   if (selected === props.color) {
     style += " border-2 border-black";

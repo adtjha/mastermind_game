@@ -2,11 +2,13 @@ import { Row } from "./Row";
 import { useDispatch, useSelector } from "react-redux";
 import {
   getCurrent,
+} from "../Store";
+import { set_finished } from "../Store/action/creator";
+import {
   getPrevRows,
   getSelectedColor,
-  getStack,
-  set_finished,
-} from "../../store";
+  getStack
+} from "../Store/selectors";
 
 export const DecodingBoard = () => {
   let rows = [];

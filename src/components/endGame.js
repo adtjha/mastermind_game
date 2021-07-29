@@ -1,5 +1,5 @@
 import { useDispatch } from "react-redux";
-import { reset_game } from "../store";
+import { reset_game } from "./Store/action/creator";
 
 export const EndGame = (props) => {
 const dispatch = useDispatch()
