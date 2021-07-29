@@ -21,7 +21,7 @@ export default function App() {
   });
 
   return (
-    <div className="bg-yellow-50 w-screen max-h-screen">
+    <div className="bg-yellow-50 w-screen h-screen">
       <div className="bg-yellow-50 h-auto md:h-max md:max-w-lg md:m-auto">
         {title}
         <Rules />
