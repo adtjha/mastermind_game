@@ -1,5 +1,5 @@
 import { Pegs } from "./components/Pegs";
-import { EndGame, endGame } from "./components/endGame";
+import { EndGame } from "./components/endGame";
 import { DecodingBoard } from "./components/Decode";
 import { Rules } from "./components/rules";
 import { title } from "./components/title";
@@ -18,7 +18,7 @@ export default function App() {
     const randomArr = [1, 2, 3, 4].map((e) => Math.ceil(Math.random() * 6));
     const colorArr = randomArr.map((e) => pegsColor[e - 1]);
     dispatch(set_code(colorArr));
-  }, []);
+  });
 
   return (
     <div className="bg-yellow-50 w-screen max-h-screen">
